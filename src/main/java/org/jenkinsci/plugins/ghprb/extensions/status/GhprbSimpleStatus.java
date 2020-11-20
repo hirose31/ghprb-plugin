@@ -175,6 +175,10 @@ public class GhprbSimpleStatus extends GhprbExtension implements
         if (showMatrixStatus && !(build.getParent() instanceof MatrixProject)) {
             return;
         }
+        // skip post parent job
+        if (build.getParent() instanceof MatrixProject) {
+            return;
+        }
 
         // check if we even need to update
         if (StringUtils.equals(startedStatus, "--none--")) {
@@ -204,6 +208,10 @@ public class GhprbSimpleStatus extends GhprbExtension implements
         // If the showMatrixStatus checkbox is selected and the job is not a Matrix Job (Children
         // nodes), then don't post statuses
         if (showMatrixStatus && !(build.getParent() instanceof MatrixProject)) {
+            return;
+        }
+        // skip post parent job
+        if (build.getParent() instanceof MatrixProject) {
             return;
         }
 
